@@ -1,0 +1,89 @@
+# 设备初始化
+
+[2025-06-05 02:01:21.439]# SEND ASCII>
+AT
+
+
+[2025-06-05 02:01:21.499]# RECV ASCII>
+AT
+
+OK
+
+
+[2025-06-05 02:01:30.342]# SEND ASCII>
+AT+MIPCALL=1
+
+
+[2025-06-05 02:01:30.402]# RECV ASCII>
+AT+MIPCALL=1
+
+OK
+
++MIPCALL: 10.122.14.103
+
+
+#建立云平台连接
+
+[2025-06-05 02:02:35.488]# SEND ASCII>
+AT+HMCON=0,60,"e447071c94.st1.iotda-device.cn-north-4.myhuaweicloud.com","1883","Gateway_1","319b6ae1c991d1df041f8a974fbf39b4",0
+
+
+[2025-06-05 02:02:35.535]# RECV ASCII>
+AT+HMCON=0,60,"e447071c94.st1.iotda-device.cn-north-4.myhuaweicloud.com","1883","Gateway_1","319b6ae1c991d1df041f8a974fbf39b4",0
+
+
+[2025-06-05 02:02:36.365]# RECV ASCII>
+
++HMCON OK
+
+
+# 上报子设备在线状态
+
+[2025-06-05 02:07:04.049]# SEND ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/events/up",274,"{\"services\":[{\"service_id\":\"$sub_device_manager\",\"event_type\":\"sub_device_update_status\",\"paras\":{\"device_statuses\":[{\"device_id\":\"Internal_Sensor_1\",\"status\":\"ONLINE\"},{\"device_id\":\"External_Sensor_1\",\"status\":\"ONLINE\"},{\"device_id\":\"Control_Node_1\",\"status\":\"ONLINE\"}]}}]}"
+
+
+[2025-06-05 02:07:04.096]# RECV ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/events/up",274,"{\"services\":[{\"service_id\":\"$sub_device_manager\",\"event_type\":\"sub_device_update_status\",\"paras\":{\"device_statuses\":[{\"device_id\":\"Internal_Sensor_1\",\"status\":\"ONLINE\"},{\"device_id\":\"External_Sensor_1\",\"status\":\"ONLINE\"},{\"device_id\":\"Control_Node_1\",\"status\":\"ONLINE\"}]}}]}"
+
+
+[2025-06-05 02:07:04.274]# RECV ASCII>
+
++HMPUB OK
+
+
+# 上报子设备离线状态
+
+[2025-06-05 02:07:42.579]# SEND ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/events/up",277,"{\"services\":[{\"service_id\":\"$sub_device_manager\",\"event_type\":\"sub_device_update_status\",\"paras\":{\"device_statuses\":[{\"device_id\":\"Internal_Sensor_1\",\"status\":\"OFFLINE\"},{\"device_id\":\"External_Sensor_1\",\"status\":\"OFFLINE\"},{\"device_id\":\"Control_Node_1\",\"status\":\"OFFLINE\"}]}}]}"
+
+
+[2025-06-05 02:07:42.641]# RECV ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/events/up",277,"{\"services\":[{\"service_id\":\"$sub_device_manager\",\"event_type\":\"sub_device_update_status\",\"paras\":{\"device_statuses\":[{\"device_id\":\"Internal_Sensor_1\",\"status\":\"OFFLINE\"},{\"device_id\":\"External_Sensor_1\",\"status\":\"OFFLINE\"},{\"device_id\":\"Control_Node_1\",\"status\":\"OFFLINE\"}]}}]}"
+
+
+[2025-06-05 02:07:42.824]# RECV ASCII>
+
++HMPUB OK
+
+
+# 云端同步控制命令下发
+
+[2025-06-05 02:23:04.413]# RECV ASCII>
+
++HMREC: "$oc/devices/Gateway_1/sys/commands/request_id=aeabd71f-8d72-4efe-9577-e1d77dfe0e84",114,"{"paras":{"status":true},"service_id":"control","command_name":"setFanStatus","object_device_id":"Control_Node_1"}"
+
+
+# 云端同步控制命令响应
+
+[2025-06-05 02:23:16.708]# SEND ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/commands/response/request_id=aeabd71f-8d72-4efe-9577-e1d77dfe0e84",17,"{\"result_code\":0}"
+
+
+[2025-06-05 02:23:16.755]# RECV ASCII>
+AT+HMPUB=1,"$oc/devices/Gateway_1/sys/commands/response/request_id=aeabd71f-8d72-4efe-9577-e1d77dfe0e84",17,"{\"result_code\":0}"
+
+
+[2025-06-05 02:23:16.958]# RECV ASCII>
+
++HMPUB OK

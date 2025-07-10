@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+  智慧农业物联网可视化平台
+  © 2025 
+  开发团队: 黄浩、王伟
+  联系邮箱: 2768607063@163.com
+  版权所有，未经授权禁止复制、分发或修改
+-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.95, maximum-scale=0.95, user-scalable=no" />
+    <meta name="author" content=" - 黄浩、王伟" />
+    <meta name="copyright" content="© 2025 " />
+    <meta name="contact" content="2768607063@163.com" />
+    <meta name="description" content="智慧农业物联网可视化监控平台，用于监测和控制农业大棚环境参数" />
+    <title>智慧农业大棚可视化监控平台</title>
+    <!-- 添加Google字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 添加Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* 全局样式：隐藏滚动条 */
+      html, body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+        width: 0 !important;
+        height: 0 !important;
+      }
+      
+      /* 添加页面加载动画 */
+      .page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+      
+      .loader {
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgba(59, 130, 246, 0.3);
+        border-radius: 50%;
+        border-top-color: #3b82f6;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 页面加载动画 -->
+    <div class="page-loader" id="pageLoader">
+      <div class="loader"></div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // 页面加载完成后隐藏加载动画
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('pageLoader').classList.add('fade-out');
+          setTimeout(function() {
+            document.getElementById('pageLoader').style.display = 'none';
+          }, 500);
+        }, 500);
+      });
+      
+      // 防止非法复制
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        console.log('© 2025  - 版权所有');
+      });
+      
+      console.log('%c © 2025  - 黄浩、王伟 - 联系邮箱: 2768607063@163.com', 'font-size:12px;color:#0c5d8f;font-weight:bold;');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+E:\iar\ewarm-9.60.2\arm\bin\armPROC.dll
+
+ E:\iar\ewarm-9.60.2\arm\bin\armJET.dll
+
+ C:\Users\24171\Desktop\Control_Node\EWARM\Control_Node\Exe\Control_Node.out
+
+ --plugin=E:\iar\ewarm-9.60.2\arm\bin\armLibSupportUniversal.dll
+
+ --device_macro=E:\iar\ewarm-9.60.2\arm/config/debugger/ST/STM32G4xx.dmac
+
+ --flash_loader=E:\iar\ewarm-9.60.2\arm/config/flashloader/ST/FlashSTM32G47xxx.board
+
+ 
+
+

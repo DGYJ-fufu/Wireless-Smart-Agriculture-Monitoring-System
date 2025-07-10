@@ -1,0 +1,58 @@
+# 智慧农业物联网可视化平台 - Docker Compose配置
+# 版权所有 (c) 2023-2025 
+# 开发者: 黄浩、王伟
+# 联系方式: 2768607063@163.com
+
+version: '3.8'
+
+services:
+  # 主应用服务
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: agriculture-iot-app
+    restart: always
+    ports:
+      - "5555:5555"
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=5555
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=agriculture_iot
+      - CONTROL_API_URL=http://localhost:8080
+    depends_on:
+      - db
+    networks:
+      - agriculture-net
+  
+  # 数据库服务
+  db:
+    image: mysql:8.0
+    container_name: agriculture-iot-db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=agriculture_iot
+      - MYSQL_CHARACTER_SET_SERVER=utf8mb4
+      - MYSQL_COLLATION_SERVER=utf8mb4_unicode_ci
+    volumes:
+      - agriculture-db-data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - agriculture-net
+
+# 持久化存储
+volumes:
+  agriculture-db-data:
+    name: agriculture-iot-db-data
+
+# 网络配置
+networks:
+  agriculture-net:
+    name: agriculture-iot-network 
